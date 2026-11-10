@@ -267,7 +267,7 @@
         </div>
     </div>
 
-    <!-- KHO GIẢI TRÍ (KHO 1) -->
+    <!-- KHO GIẢI TRÍ -->
     <div id="entertainment-section" class="sub-section">
         <a class="back-link" onclick="showMenu()">⬅ Quay lại Menu chính</a>
         <h2>Kho Giải Trí Tổng Hợp</h2>
@@ -304,7 +304,7 @@
         </div>
     </div>
 
-    <!-- KHO ỨNG DỤNG HAY (KHO 2) -->
+    <!-- KHO ỨNG DỤNG HAY -->
     <div id="apps-section" class="sub-section">
         <a class="back-link" onclick="showMenu()">⬅ Quay lại Menu chính</a>
         <h2>Kho Ứng Dụng Hay (APK)</h2>
@@ -371,16 +371,16 @@
     }
 
     // ==========================================
-    // KHO 1: KHO GIẢI TRÍ (Gắn link Mega.nz chuẩn theo thứ tự)[cite: 7]
+    // KHO 1: KHO GIẢI TRÍ (Gắn link GitHub Releases trực tiếp)
     // ==========================================
     const entertainmentAppList = [
-        { filename: "Đậu_Đậu_Đường.apk", icon: "Đậu_Đậu_Đường.png", locked: false, url: "https://mega.nz/file/vaxyCCRD#-dM_M7P5WUOgxitJmykeGMjFOW5KPLnOdPlPfzviMqg" },
-        { filename: "Tăng_tốc_game_Trung.apk", icon: "Tăng_tốc_game_Trung.png", locked: false, url: "https://mega.nz/file/vSxmiACC#yzwGWc6bXDqRzrpz7uqrwV2fX-Ud6qiMSFBUsZcF65g" },
+        { filename: "D.u_D.u_D.ng.apk", icon: "D.u_D.u_D.ng.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/D.u_D.u_D.ng.apk" },
+        { filename: "Tang_t.c_game_Trung.apk", icon: "Tang_t.c_game_Trung.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/Tang_t.c_game_Trung.apk" },
         { filename: "VPN_Speedcn_Crack.apk", icon: "VPN_Speedcn_Crack.png", locked: true }, // Bị khóa
-        { filename: "VPN_SpeedCN_Trung.apk", icon: "VPN_SpeedCN_Trung.png", locked: false, url: "https://mega.nz/file/OGYmRDaQ#6gVfwBSu79m4VJSTfsvr1IBF0nnDyK2T3W5KLvSaMyo" },
-        { filename: "VPN_SpeedCN_Viethoa.apk", icon: "VPN_SpeedCN_Viethoa.png", locked: false, url: "https://mega.nz/file/KKI22Zzb#u2vafLUHbyKCzcuxrmauphXDvefGv5KKlpTAs-3QLMM" },
-        { filename: "X7Game_Trung.apk", icon: "X7Game_Trung.png", locked: false, url: "https://mega.nz/file/CCAi2JRA#AeCfOp3D-Pnp55VgXY3HhHTnkdky0ZKivk6pYwVc5HQ" },
-        { filename: "X7Game_Viet.apk", icon: "X7Game_Viet.png", locked: false, url: "https://mega.nz/file/bKZgGKIJ#42BRps_XlZOrjAkbEo9cgBCfn4vNofBWxJgev6jfyQ0" }
+        { filename: "VPN_SpeedCN_Trung.apk", icon: "VPN_SpeedCN_Trung.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/VPN_SpeedCN_Trung.apk" },
+        { filename: "VPN_SpeedCN_Viethoa.apk", icon: "VPN_SpeedCN_Viethoa.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/VPN_SpeedCN_Viethoa.apk" },
+        { filename: "X7Game_Trung.apk", icon: "X7Game_Trung.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/X7Game_Trung.apk" },
+        { filename: "X7Game_Viet.apk", icon: "X7Game_Viet.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/X7Game_Viet.apk" }
     ];
 
     const entContainer = document.getElementById('entertainment-apk-container');
@@ -409,7 +409,7 @@
             item = document.createElement('a');
             item.className = 'item-row';
             item.href = app.url;
-            item.target = "_blank";
+            item.setAttribute('download', '');
             item.innerHTML = `
                 <div class="item-info">
                     ${iconHTML}
@@ -425,12 +425,12 @@
     });
 
     // ==========================================
-    // KHO 2: KHO ỨNG DỤNG HAY (Gắn link Mega.nz chuẩn theo thứ tự)[cite: 7]
+    // KHO 2: KHO ỨNG DỤNG HAY
     // ==========================================
     const usefulAppList = [
-        { filename: "MicroG_YTB.apk", icon: "MicroG_YTB.png", locked: false, url: "https://mega.nz/file/uehllbYA#ECiDGeZS3X7L8pOA__pddAw1W15rgcbN1urWLCkYdtg" },
+        { filename: "MicroG_YTB.apk", icon: "MicroG_YTB.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/MicroG_YTB.apk" },
         { filename: "TikTok_Mod.apk", icon: "TikTok_Mod.png", locked: true }, // Bị khóa
-        { filename: "YouTube_Crack_Prenium.apk", icon: "YouTube_Crack_Prenium.png", locked: false, url: "https://mega.nz/file/3W5gFYZa#2XHIWtcoOiImeKJ1p5QeK2JerUUd4_FRWcqZ9INHHUw" }
+        { filename: "YouTube_Crack_Prenium.apk", icon: "YouTube_Crack_Prenium.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/YouTube_Crack_Prenium.apk" }
     ];
 
     const apkContainer = document.getElementById('apk-container');
@@ -459,7 +459,7 @@
             item = document.createElement('a');
             item.className = 'item-row';
             item.href = app.url;
-            item.target = "_blank";
+            item.setAttribute('download', '');
 
             item.innerHTML = `
                 <div class="item-info">
