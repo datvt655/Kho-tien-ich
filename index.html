@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kho Tiện Ích & Giải Trí</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        /* 1. LƯỚI 5 KHỐI HÌNH VUÔNG TRANG CHỦ */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1000px;
+        }
+        .card {
+            background: #ffffff;
+            aspect-ratio: 1 / 1;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 2px solid transparent;
+            box-sizing: border-box;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 28px rgba(0,123,255,0.18);
+            border-color: #007bff;
+        }
+        .card.locked {
+            opacity: 0.75;
+            background: #f8f9fa;
+            border: 2px dashed #cccccc;
+        }
+        .card.locked:hover {
+            border-color: #dc3545;
+            box-shadow: 0 12px 28px rgba(220,53,69,0.18);
+        }
+        .card .icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+        .card h3 {
+            margin: 0 0 8px 0;
+            font-size: 18px;
+            color: #007bff;
+        }
+        .card.locked h3 {
+            color: #6c757d;
+        }
+        .card p {
+            margin: 0;
+            font-size: 13px;
+            color: #6c757d;
+            line-height: 1.4;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 20px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 2. KHUNG KHO CON */
+        .sub-section {
+            display: none;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 680px;
+            box-sizing: border-box;
+        }
+        .sub-section.active {
+            display: block;
+        }
+        .sub-section h2 {
+            margin-top: 0;
+            color: #1a252f;
+            font-size: 22px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        .category-group {
+            margin-bottom: 25px;
+        }
+        .category-group h3 {
+            color: #34495e;
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .item-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .item-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.2s ease;
+            background: #fff;
+            cursor: pointer;
+        }
+        .item-row:hover {
+            background-color: #f0f7ff;
+            border-color: #007bff;
+        }
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        
+        .app-icon-img {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .item-icon {
+            font-size: 28px;
+            width: 42px;
+            text-align: center;
+        }
+
+        .item-details h4 {
+            margin: 0;
+            font-size: 15px;
+            color: #007bff;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .item-details p {
+            margin: 4px 0 0 0;
+            font-size: 12px;
+            color: #6c757d;
+        }
+        .badge-locked {
+            background-color: #dc3545;
+            color: #ffffff;
+            font-size: 11px;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .btn-action {
+            background-color: #28a745;
+            color: white;
+            padding: 7px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .btn-action.locked-btn {
+            background-color: #6c757d;
+        }
+
+        /* Tra cứu CMT */
+        .input-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #495057; }
+        input[type="number"] { width: 100%; padding: 12px; border: 1px solid #ced4da; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+        button.btn-search { width: 100%; padding: 12px; background-color: #007bff; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        button.btn-search:hover { background-color: #0056b3; }
+        .result-box { margin-top: 15px; padding: 15px; border-radius: 8px; background-color: #e9ecef; display: none; }
+        .result-box.active { display: block; }
+        .result-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #dee2e6; font-size: 15px; }
+        .result-item:last-child { border-bottom: none; }
+        .copy-btn { background: #fff; border: 1px solid #ced4da; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 13px; }
+        .copy-btn:hover { background-color: #28a745; color: white; }
+
+        /* Popup chung */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 9999; }
+        .modal-overlay.active { display: flex; }
+        .modal-box { background: white; padding: 25px; border-radius: 16px; width: 90%; max-width: 420px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+        .modal-box h3 { color: #dc3545; margin-top: 0; font-size: 20px; }
+        .modal-box p { color: #495057; font-size: 14px; line-height: 1.6; margin: 15px 0; }
+        .contact-info { background: #f8f9fa; padding: 12px; border-radius: 8px; border: 1px solid #e9ecef; text-align: left; margin-bottom: 20px; font-size: 14px; }
+        
+        /* Popup Video */
+        .video-modal-box { background: #000; padding: 15px; border-radius: 16px; width: 90%; max-width: 650px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.4); position: relative; }
+        .video-modal-box video { width: 100%; border-radius: 8px; outline: none; max-height: 70vh; }
+        .video-close-btn { margin-top: 10px; background: #dc3545; color: white; border: none; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <h1 id="page-title">Kho Tiện Ích & Giải Trí</h1>
+
+    <div class="grid-container" id="menu-grid">
+        <div class="card" onclick="showSection('entertainment-section')">
+            <div class="icon">🎮</div>
+            <h3>Kho Giải Trí</h3>
+            <p>CMT Trung, Game APK & Video hướng dẫn</p>
+        </div>
+        <div class="card" onclick="showSection('apps-section')">
+            <div class="icon">📦</div>
+            <h3>Kho Ứng Dụng Hay</h3>
+            <p>Danh sách các tệp APK tiện ích hỗ trợ</p>
+        </div>
+        <div class="card locked" onclick="showLockedPopup()">
+            <div class="icon">🔒</div>
+            <h3>Đang Cập Nhật</h3>
+            <p>Tính năng sắp ra mắt</p>
+        </div>
+        <div class="card locked" onclick="showLockedPopup()">
+            <div class="icon">🔒</div>
+            <h3>Đang Cập Nhật</h3>
+            <p>Tính năng sắp ra mắt</p>
+        </div>
+        <div class="card locked" onclick="showLockedPopup()">
+            <div class="icon">🔒</div>
+            <h3>Đang Cập Nhật</h3>
+            <p>Tính năng sắp ra mắt</p>
+        </div>
+    </div>
+
+    <!-- KHO GIẢI TRÍ (KHO 1) -->
+    <div id="entertainment-section" class="sub-section">
+        <a class="back-link" onclick="showMenu()">⬅ Quay lại Menu chính</a>
+        <h2>Kho Giải Trí Tổng Hợp</h2>
+
+        <div class="category-group">
+            <h3>🔍 Tra Cứu Thông Tin CMT Trung</h3>
+            <div class="input-group">
+                <label for="searchStt">Nhập Số Thứ Tự (STT):</label>
+                <input type="number" id="searchStt" placeholder="Ví dụ: 1, 2, 3..." min="1">
+            </div>
+            <button class="btn-search" onclick="searchBySTT()">Tìm kiếm thông tin</button>
+            <div id="result" class="result-box"></div>
+        </div>
+
+        <div class="category-group">
+            <h3>🎮 Danh Sách Trò Chơi & App APK</h3>
+            <div class="item-list" id="entertainment-apk-container"></div>
+        </div>
+
+        <div class="category-group">
+            <h3>🎬 Video Hướng Dẫn Nổi Bật</h3>
+            <div class="item-list">
+                <div class="item-row" onclick="openVideoModal()">
+                    <div class="item-info">
+                        <div class="item-icon">📺</div>
+                        <div class="item-details">
+                            <h4>Hướng dẫn buff VIP VPN SpeedCN</h4>
+                            <p>Xem video hướng dẫn chi tiết trực tiếp trên web</p>
+                        </div>
+                    </div>
+                    <div class="btn-action" style="background-color: #007bff;">Xem video</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KHO ỨNG DỤNG HAY (KHO 2) -->
+    <div id="apps-section" class="sub-section">
+        <a class="back-link" onclick="showMenu()">⬅ Quay lại Menu chính</a>
+        <h2>Kho Ứng Dụng Hay (APK)</h2>
+        <div class="category-group">
+            <h3>🛠️ Tiện Ích & Công Cụ Hỗ Trợ</h3>
+            <div class="item-list" id="apk-container"></div>
+        </div>
+    </div>
+
+    <!-- POPUP LIÊN HỆ KHI KHÓA -->
+    <div class="modal-overlay" id="lockedModal">
+        <div class="modal-box">
+            <h3>🔒 Tính Năng Đang Bị Khóa</h3>
+            <p>Ứng dụng hoặc tiện ích này hiện đang giới hạn truy cập. Vui lòng liên hệ Admin để được hỗ trợ mở khóa!</p>
+            <div class="contact-info">
+                <strong>📞 Thông tin liên hệ:</strong><br>
+                • Zalo / SĐT: <strong>0123.456.789</strong><br>
+                • Email: <strong>hotro@tiendat.local</strong>
+            </div>
+            <button class="modal-close" onclick="closeLockedPopup()">Đã hiểu</button>
+        </div>
+    </div>
+
+    <!-- POPUP XEM VIDEO -->
+    <div class="modal-overlay" id="videoModal">
+        <div class="video-modal-box">
+            <video id="tutorialVideo" controls>
+                <source src="Hướng_dẫn_buff_vip_VPN_SPEEDCN.mp4" type="video/mp4">
+                Trình duyệt của bạn không hỗ trợ phát video.
+            </video>
+            <br>
+            <button class="video-close-btn" onclick="closeVideoModal()">Đóng Video</button>
+        </div>
+    </div>
+
+<script>
+    function showSection(sectionId) {
+        document.getElementById('menu-grid').style.display = 'none';
+        document.getElementById('page-title').style.display = 'none';
+        document.getElementById('entertainment-section').classList.remove('active');
+        document.getElementById('apps-section').classList.remove('active');
+        document.getElementById(sectionId).classList.add('active');
+    }
+
+    function showMenu() {
+        document.getElementById('entertainment-section').classList.remove('active');
+        document.getElementById('apps-section').classList.remove('active');
+        document.getElementById('menu-grid').style.display = 'grid';
+        document.getElementById('page-title').style.display = 'block';
+    }
+
+    function showLockedPopup() { document.getElementById('lockedModal').classList.add('active'); }
+    function closeLockedPopup() { document.getElementById('lockedModal').classList.remove('active'); }
+
+    function openVideoModal() {
+        document.getElementById('videoModal').classList.add('active');
+        document.getElementById('tutorialVideo').play();
+    }
+    function closeVideoModal() {
+        const vid = document.getElementById('tutorialVideo');
+        vid.pause();
+        vid.currentTime = 0;
+        document.getElementById('videoModal').classList.remove('active');
+    }
+
+    // ==========================================
+    // KHO 1: KHO GIẢI TRÍ (Gắn link Mega.nz chuẩn theo thứ tự)[cite: 7]
+    // ==========================================
+    const entertainmentAppList = [
+        { filename: "Đậu_Đậu_Đường.apk", icon: "Đậu_Đậu_Đường.png", locked: false, url: "https://mega.nz/file/vaxyCCRD#-dM_M7P5WUOgxitJmykeGMjFOW5KPLnOdPlPfzviMqg" },
+        { filename: "Tăng_tốc_game_Trung.apk", icon: "Tăng_tốc_game_Trung.png", locked: false, url: "https://mega.nz/file/vSxmiACC#yzwGWc6bXDqRzrpz7uqrwV2fX-Ud6qiMSFBUsZcF65g" },
+        { filename: "VPN_Speedcn_Crack.apk", icon: "VPN_Speedcn_Crack.png", locked: true }, // Bị khóa
+        { filename: "VPN_SpeedCN_Trung.apk", icon: "VPN_SpeedCN_Trung.png", locked: false, url: "https://mega.nz/file/OGYmRDaQ#6gVfwBSu79m4VJSTfsvr1IBF0nnDyK2T3W5KLvSaMyo" },
+        { filename: "VPN_SpeedCN_Viethoa.apk", icon: "VPN_SpeedCN_Viethoa.png", locked: false, url: "https://mega.nz/file/KKI22Zzb#u2vafLUHbyKCzcuxrmauphXDvefGv5KKlpTAs-3QLMM" },
+        { filename: "X7Game_Trung.apk", icon: "X7Game_Trung.png", locked: false, url: "https://mega.nz/file/CCAi2JRA#AeCfOp3D-Pnp55VgXY3HhHTnkdky0ZKivk6pYwVc5HQ" },
+        { filename: "X7Game_Viet.apk", icon: "X7Game_Viet.png", locked: false, url: "https://mega.nz/file/bKZgGKIJ#42BRps_XlZOrjAkbEo9cgBCfn4vNofBWxJgev6jfyQ0" }
+    ];
+
+    const entContainer = document.getElementById('entertainment-apk-container');
+    entContainer.innerHTML = '';
+    entertainmentAppList.forEach(app => {
+        let appName = app.filename.replace(/\.apk$/i, '');
+        let iconHTML = `<img src="${app.icon}" class="app-icon-img" onerror="this.onerror=null; this.outerHTML='<div class=\\'item-icon\\'>🎮</div>';">`;
+        let item;
+
+        if (app.locked) {
+            item = document.createElement('div');
+            item.className = 'item-row';
+            item.style.cursor = 'pointer';
+            item.onclick = showLockedPopup;
+            item.innerHTML = `
+                <div class="item-info">
+                    ${iconHTML}
+                    <div class="item-details">
+                        <h4 style="color: #6c757d;">${appName} <span class="badge-locked">Bị khóa</span></h4>
+                        <p>File: ${app.filename}</p>
+                    </div>
+                </div>
+                <button class="btn-action locked-btn">🔒 Bị khóa</button>
+            `;
+        } else {
+            item = document.createElement('a');
+            item.className = 'item-row';
+            item.href = app.url;
+            item.target = "_blank";
+            item.innerHTML = `
+                <div class="item-info">
+                    ${iconHTML}
+                    <div class="item-details">
+                        <h4>${appName}</h4>
+                        <p>File: ${app.filename}</p>
+                    </div>
+                </div>
+                <div class="btn-action">⬇ Tải xuống</div>
+            `;
+        }
+        entContainer.appendChild(item);
+    });
+
+    // ==========================================
+    // KHO 2: KHO ỨNG DỤNG HAY (Gắn link Mega.nz chuẩn theo thứ tự)[cite: 7]
+    // ==========================================
+    const usefulAppList = [
+        { filename: "MicroG_YTB.apk", icon: "MicroG_YTB.png", locked: false, url: "https://mega.nz/file/uehllbYA#ECiDGeZS3X7L8pOA__pddAw1W15rgcbN1urWLCkYdtg" },
+        { filename: "TikTok_Mod.apk", icon: "TikTok_Mod.png", locked: true }, // Bị khóa
+        { filename: "YouTube_Crack_Prenium.apk", icon: "YouTube_Crack_Prenium.png", locked: false, url: "https://mega.nz/file/3W5gFYZa#2XHIWtcoOiImeKJ1p5QeK2JerUUd4_FRWcqZ9INHHUw" }
+    ];
+
+    const apkContainer = document.getElementById('apk-container');
+    apkContainer.innerHTML = '';
+    usefulAppList.forEach(app => {
+        let appName = app.filename.replace(/\.apk$/i, '');
+        let iconHTML = `<img src="${app.icon}" class="app-icon-img" onerror="this.onerror=null; this.outerHTML='<div class=\\'item-icon\\'>📱</div>';">`;
+        let item;
+
+        if (app.locked) {
+            item = document.createElement('div');
+            item.className = 'item-row';
+            item.style.cursor = 'pointer';
+            item.onclick = showLockedPopup;
+            item.innerHTML = `
+                <div class="item-info">
+                    ${iconHTML}
+                    <div class="item-details">
+                        <h4 style="color: #6c757d;">${appName} <span class="badge-locked">Bị khóa</span></h4>
+                        <p>File: ${app.filename}</p>
+                    </div>
+                </div>
+                <button class="btn-action locked-btn">🔒 Bị khóa</button>
+            `;
+        } else {
+            item = document.createElement('a');
+            item.className = 'item-row';
+            item.href = app.url;
+            item.target = "_blank";
+
+            item.innerHTML = `
+                <div class="item-info">
+                    ${iconHTML}
+                    <div class="item-details">
+                        <h4>${appName}</h4>
+                        <p>File: ${app.filename}</p>
+                    </div>
+                </div>
+                <div class="btn-action">⬇ Tải ngay</div>
+            `;
+        }
+        apkContainer.appendChild(item);
+    });
+
+    // ==========================================
+    // TRA CỨU CMT TRUNG TỪ FILE data.json
+    // ==========================================
+    let sttDataMap = new Map();
+    fetch('data.json')
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(item => sttDataMap.set(Number(item.stt), item));
+        })
+        .catch(err => console.error(err));
+
+    function searchBySTT() {
+        const sttInput = parseInt(document.getElementById('searchStt').value, 10);
+        const resultDiv = document.getElementById('result');
+
+        if (isNaN(sttInput)) {
+            resultDiv.className = 'result-box active error';
+            resultDiv.innerHTML = 'Vui lòng nhập số thứ tự hợp lệ!';
+            return;
+        }
+
+        if (sttDataMap.has(sttInput)) {
+            const found = sttDataMap.get(sttInput);
+            const nameVal = found.name || found["Nama ID"] || "";
+            const idVal = found.id || found["Nomor ID China"] || "";
+            const dobVal = found.dob || found["Kelahiran"] || "";
+
+            resultDiv.className = 'result-box active';
+            resultDiv.innerHTML = `
+                <div class="result-item">
+                    <span><strong>Họ tên:</strong> ${nameVal}</span>
+                    <button class="copy-btn" onclick="copyToClipboard('${nameVal}', this)">📋 Copy</button>
+                </div>
+                <div class="result-item">
+                    <span><strong>Số CCCD:</strong> ${idVal}</span>
+                    <button class="copy-btn" onclick="copyToClipboard('${idVal}', this)">📋 Copy</button>
+                </div>
+                ${dobVal ? `
+                <div class="result-item">
+                    <span><strong>Ngày sinh:</strong> ${dobVal}</span>
+                    <button class="copy-btn" onclick="copyToClipboard('${dobVal}', this)">📋 Copy</button>
+                </div>` : ''}
+            `;
+        } else {
+            resultDiv.className = 'result-box active error';
+            resultDiv.innerHTML = `Không tìm thấy thông tin cho STT: ${sttInput}`;
+        }
+    }
+
+    function copyToClipboard(text, btnElement) {
+        navigator.clipboard.writeText(text).then(() => {
+            const originalText = btnElement.innerHTML;
+            btnElement.innerHTML = '✔ Đã sao chép';
+            btnElement.style.backgroundColor = '#28a745';
+            btnElement.style.color = '#fff';
+            setTimeout(() => {
+                btnElement.innerHTML = originalText;
+                btnElement.style.backgroundColor = '';
+                btnElement.style.color = '';
+            }, 1500);
+        });
+    }
+
+    document.getElementById('searchStt').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') { searchBySTT(); }
+    });
+</script>
+
+</body>
+</html>
