@@ -9,7 +9,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f6f9;
             margin: 0;
-            padding: 40px 20px;
+            padding: 20px 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -18,29 +18,30 @@
         }
         h1 {
             color: #2c3e50;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             text-align: center;
+            font-size: 24px;
         }
         
         /* 1. LƯỚI 5 KHỐI HÌNH VUÔNG TRANG CHỦ */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
             width: 100%;
-            max-width: 1000px;
+            max-width: 800px;
         }
         .card {
             background: #ffffff;
             aspect-ratio: 1 / 1;
-            border-radius: 20px;
+            border-radius: 16px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.06);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
+            padding: 15px;
             cursor: pointer;
             text-decoration: none;
             color: #333;
@@ -49,7 +50,7 @@
             box-sizing: border-box;
         }
         .card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px);
             box-shadow: 0 12px 28px rgba(0,123,255,0.18);
             border-color: #007bff;
         }
@@ -63,12 +64,12 @@
             box-shadow: 0 12px 28px rgba(220,53,69,0.18);
         }
         .card .icon {
-            font-size: 48px;
-            margin-bottom: 12px;
+            font-size: 38px;
+            margin-bottom: 10px;
         }
         .card h3 {
-            margin: 0 0 8px 0;
-            font-size: 18px;
+            margin: 0 0 6px 0;
+            font-size: 16px;
             color: #007bff;
         }
         .card.locked h3 {
@@ -76,16 +77,16 @@
         }
         .card p {
             margin: 0;
-            font-size: 13px;
+            font-size: 12px;
             color: #6c757d;
-            line-height: 1.4;
+            line-height: 1.3;
         }
 
         .back-link {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: #007bff;
             text-decoration: none;
             font-weight: bold;
@@ -100,7 +101,7 @@
         .sub-section {
             display: none;
             background: #ffffff;
-            padding: 30px;
+            padding: 20px;
             border-radius: 16px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.08);
             width: 100%;
@@ -113,18 +114,18 @@
         .sub-section h2 {
             margin-top: 0;
             color: #1a252f;
-            font-size: 22px;
+            font-size: 20px;
             border-bottom: 2px solid #e9ecef;
             padding-bottom: 10px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .category-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         .category-group h3 {
             color: #34495e;
-            font-size: 16px;
+            font-size: 15px;
             margin-bottom: 12px;
             display: flex;
             align-items: center;
@@ -133,13 +134,15 @@
         .item-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
+        
+        /* TỐI ƯU CHỐNG TRÀN TRÊN MOBILE */
         .item-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 16px;
+            padding: 10px 12px;
             border: 1px solid #e9ecef;
             border-radius: 10px;
             text-decoration: none;
@@ -147,6 +150,7 @@
             transition: all 0.2s ease;
             background: #fff;
             cursor: pointer;
+            gap: 10px;
         }
         .item-row:hover {
             background-color: #f0f7ff;
@@ -155,84 +159,102 @@
         .item-info {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
+            flex: 1;
+            min-width: 0; /* Bắt buộc để flexbox không bị đẩy tràn màn hình điện thoại */
         }
         
         .app-icon-img {
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
             object-fit: cover;
+            flex-shrink: 0;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
         .item-icon {
-            font-size: 28px;
-            width: 42px;
+            font-size: 24px;
+            width: 38px;
             text-align: center;
+            flex-shrink: 0;
         }
 
+        .item-details {
+            display: flex;
+            flex-direction: column;
+            min-width: 0; /* Giúp text dài tự động ẩn bằng dấu ... */
+            flex: 1;
+        }
         .item-details h4 {
             margin: 0;
-            font-size: 15px;
+            font-size: 14px;
             color: #007bff;
             display: flex;
             align-items: center;
             flex-wrap: wrap;
             gap: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .item-details p {
-            margin: 4px 0 0 0;
+            margin: 3px 0 0 0;
             font-size: 12px;
             color: #6c757d;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .badge-locked {
             background-color: #dc3545;
             color: #ffffff;
-            font-size: 11px;
-            padding: 2px 7px;
+            font-size: 10px;
+            padding: 1px 5px;
             border-radius: 4px;
             font-weight: 600;
         }
         .btn-action {
             background-color: #28a745;
             color: white;
-            padding: 7px 14px;
+            padding: 6px 12px;
             border-radius: 6px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
             border: none;
             cursor: pointer;
             white-space: nowrap;
+            flex-shrink: 0;
         }
         .btn-action.locked-btn {
             background-color: #6c757d;
         }
 
         /* Tra cứu CMT */
-        .input-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; color: #495057; }
-        input[type="number"] { width: 100%; padding: 12px; border: 1px solid #ced4da; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
-        button.btn-search { width: 100%; padding: 12px; background-color: #007bff; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .input-group { margin-bottom: 12px; }
+        label { display: block; margin-bottom: 6px; font-weight: bold; color: #495057; font-size: 14px; }
+        input[type="number"] { width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 8px; box-sizing: border-box; font-size: 15px; }
+        button.btn-search { width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; }
         button.btn-search:hover { background-color: #0056b3; }
-        .result-box { margin-top: 15px; padding: 15px; border-radius: 8px; background-color: #e9ecef; display: none; }
+        .result-box { margin-top: 12px; padding: 12px; border-radius: 8px; background-color: #e9ecef; display: none; font-size: 14px; }
         .result-box.active { display: block; }
-        .result-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #dee2e6; font-size: 15px; }
+        .result-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #dee2e6; }
         .result-item:last-child { border-bottom: none; }
-        .copy-btn { background: #fff; border: 1px solid #ced4da; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 13px; }
+        .copy-btn { background: #fff; border: 1px solid #ced4da; border-radius: 4px; padding: 3px 6px; cursor: pointer; font-size: 12px; }
         .copy-btn:hover { background-color: #28a745; color: white; }
 
         /* Popup chung */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 9999; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 9999; padding: 15px; box-sizing: border-box; }
         .modal-overlay.active { display: flex; }
-        .modal-box { background: white; padding: 25px; border-radius: 16px; width: 90%; max-width: 420px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
-        .modal-box h3 { color: #dc3545; margin-top: 0; font-size: 20px; }
-        .modal-box p { color: #495057; font-size: 14px; line-height: 1.6; margin: 15px 0; }
-        .contact-info { background: #f8f9fa; padding: 12px; border-radius: 8px; border: 1px solid #e9ecef; text-align: left; margin-bottom: 20px; font-size: 14px; }
-        
+        .modal-box { background: white; padding: 20px; border-radius: 16px; width: 100%; max-width: 380px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+        .modal-box h3 { color: #dc3545; margin-top: 0; font-size: 18px; }
+        .modal-box p { color: #495057; font-size: 13px; line-height: 1.5; margin: 12px 0; }
+        .contact-info { background: #f8f9fa; padding: 10px; border-radius: 8px; border: 1px solid #e9ecef; text-align: left; margin-bottom: 15px; font-size: 13px; }
+        .modal-close { background: #007bff; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+
         /* Popup Video */
-        .video-modal-box { background: #000; padding: 15px; border-radius: 16px; width: 90%; max-width: 650px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.4); position: relative; }
-        .video-modal-box video { width: 100%; border-radius: 8px; outline: none; max-height: 70vh; }
-        .video-close-btn { margin-top: 10px; background: #dc3545; color: white; border: none; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px; }
+        .video-modal-box { background: #000; padding: 12px; border-radius: 16px; width: 100%; max-width: 600px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.4); position: relative; box-sizing: border-box; }
+        .video-modal-box video { width: 100%; border-radius: 8px; outline: none; max-height: 65vh; }
+        .video-close-btn { margin-top: 8px; background: #dc3545; color: white; border: none; padding: 7px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -243,27 +265,27 @@
         <div class="card" onclick="showSection('entertainment-section')">
             <div class="icon">🎮</div>
             <h3>Kho Giải Trí</h3>
-            <p>CMT Trung, Game APK & Video hướng dẫn</p>
+            <p>CMT Trung, Game APK & Video</p>
         </div>
         <div class="card" onclick="showSection('apps-section')">
             <div class="icon">📦</div>
-            <h3>Kho Ứng Dụng Hay</h3>
-            <p>Danh sách các tệp APK tiện ích hỗ trợ</p>
+            <h3>Ứng Dụng Hay</h3>
+            <p>Tệp APK tiện ích hỗ trợ</p>
         </div>
         <div class="card locked" onclick="showLockedPopup()">
             <div class="icon">🔒</div>
-            <h3>Đang Cập Nhật</h3>
-            <p>Tính năng sắp ra mắt</p>
+            <h3>Sắp Ra Mắt</h3>
+            <p>Tính năng mới</p>
         </div>
         <div class="card locked" onclick="showLockedPopup()">
             <div class="icon">🔒</div>
-            <h3>Đang Cập Nhật</h3>
-            <p>Tính năng sắp ra mắt</p>
+            <h3>Sắp Ra Mắt</h3>
+            <p>Tính năng mới</p>
         </div>
         <div class="card locked" onclick="showLockedPopup()">
             <div class="icon">🔒</div>
-            <h3>Đang Cập Nhật</h3>
-            <p>Tính năng sắp ra mắt</p>
+            <h3>Sắp Ra Mắt</h3>
+            <p>Tính năng mới</p>
         </div>
     </div>
 
@@ -295,7 +317,7 @@
                         <div class="item-icon">📺</div>
                         <div class="item-details">
                             <h4>Hướng dẫn buff VIP VPN SpeedCN</h4>
-                            <p>Xem video hướng dẫn chi tiết trực tiếp trên web</p>
+                            <p>Xem video hướng dẫn trực tiếp</p>
                         </div>
                     </div>
                     <div class="btn-action" style="background-color: #007bff;">Xem video</div>
@@ -371,12 +393,12 @@
     }
 
     // ==========================================
-    // KHO 1: KHO GIẢI TRÍ (Gắn link GitHub Releases trực tiếp)
+    // KHO 1: KHO GIẢI TRÍ
     // ==========================================
     const entertainmentAppList = [
         { filename: "Đậu Đậu Đường.apk", icon: "Đậu_Đậu_Đường.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/D.u_D.u_D.ng.apk" },
         { filename: "Tăng_tốc_game_Trung.apk", icon: "Tăng_tốc_game_Trung.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/Tang_t.c_game_Trung.apk" },
-        { filename: "VPN_Speedcn_Crack_Vip_Vĩnh_Viễn.apk", icon: "VPN_Speedcn_Crack.png", locked: true }, // Bị khóa
+        { filename: "VPN_Speedcn_Crack_Vip_Vĩnh_Viễn.apk", icon: "VPN_Speedcn_Crack.png", locked: true },
         { filename: "VPN_SpeedCN_Trung_Xem_Video-Buff_Vip.apk", icon: "VPN_SpeedCN_Trung.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/VPN_SpeedCN_Trung.apk" },
         { filename: "VPN_SpeedCN_Viethoa_Xem_Video-Buff_Vip.apk.apk", icon: "VPN_SpeedCN_Viethoa.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/VPN_SpeedCN_Viethoa.apk" },
         { filename: "X7Game_Trung.apk", icon: "X7Game_Trung.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/X7Game_Trung.apk" },
@@ -403,7 +425,7 @@
                         <p>File: ${app.filename}</p>
                     </div>
                 </div>
-                <button class="btn-action locked-btn">🔒 Bị khóa</button>
+                <button class="btn-action locked-btn">🔒 Khóa</button>
             `;
         } else {
             item = document.createElement('a');
@@ -418,7 +440,7 @@
                         <p>File: ${app.filename}</p>
                     </div>
                 </div>
-                <div class="btn-action">⬇ Tải xuống</div>
+                <div class="btn-action">⬇ Tải</div>
             `;
         }
         entContainer.appendChild(item);
@@ -429,7 +451,7 @@
     // ==========================================
     const usefulAppList = [
         { filename: "MicroG_YTB.apk", icon: "MicroG_YTB.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/MicroG_YTB.apk" },
-        { filename: "TikTok_Mod.apk", icon: "tiktok_mod.png", locked: true }, // Bị khóa
+        { filename: "TikTok_Mod.apk", icon: "tiktok_mod.png", locked: true },
         { filename: "YouTube_Crack_Prenium.apk", icon: "YouTube_Crack_Prenium.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/YouTube_Crack_Prenium.apk" }
     ];
 
@@ -453,7 +475,7 @@
                         <p>File: ${app.filename}</p>
                     </div>
                 </div>
-                <button class="btn-action locked-btn">🔒 Bị khóa</button>
+                <button class="btn-action locked-btn">🔒 Khóa</button>
             `;
         } else {
             item = document.createElement('a');
@@ -469,7 +491,7 @@
                         <p>File: ${app.filename}</p>
                     </div>
                 </div>
-                <div class="btn-action">⬇ Tải ngay</div>
+                <div class="btn-action">⬇ Tải</div>
             `;
         }
         apkContainer.appendChild(item);
@@ -527,7 +549,7 @@
     function copyToClipboard(text, btnElement) {
         navigator.clipboard.writeText(text).then(() => {
             const originalText = btnElement.innerHTML;
-            btnElement.innerHTML = '✔ Đã sao chép';
+            btnElement.innerHTML = '✔ Đã chép';
             btnElement.style.backgroundColor = '#28a745';
             btnElement.style.color = '#fff';
             setTimeout(() => {
