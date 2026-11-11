@@ -23,7 +23,7 @@
             font-size: 24px;
         }
         
-        /* 1. LƯỚI 5 KHỐI HÌNH VUÔNG TRANG CHỦ */
+        /* 1. LƯỚI KHỐI HÌNH VUÔNG TRANG CHỦ */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -161,7 +161,7 @@
             align-items: center;
             gap: 12px;
             flex: 1;
-            min-width: 0; /* Bắt buộc để flexbox không bị đẩy tràn màn hình điện thoại */
+            min-width: 0;
         }
         
         .app-icon-img {
@@ -182,7 +182,7 @@
         .item-details {
             display: flex;
             flex-direction: column;
-            min-width: 0; /* Giúp text dài tự động ẩn bằng dấu ... */
+            min-width: 0;
             flex: 1;
         }
         .item-details h4 {
@@ -329,7 +329,7 @@
     <!-- KHO ỨNG DỤNG HAY -->
     <div id="apps-section" class="sub-section">
         <a class="back-link" onclick="showMenu()">⬅ Quay lại Menu chính</a>
-        <h2>Kho Ứng Dụng Hay (APK)</h2>
+        <h2>Kho Ứng Dụng Hay</h2>
         <div class="category-group">
             <h3>🛠️ Tiện Ích & Công Cụ Hỗ Trợ</h3>
             <div class="item-list" id="apk-container"></div>
@@ -393,22 +393,22 @@
     }
 
     // ==========================================
-    // KHO 1: KHO GIẢI TRÍ
+    // KHO 1: KHO GIẢI TRÍ (Đã đổi sang trường note)
     // ==========================================
     const entertainmentAppList = [
-        { filename: "Đậu Đậu Đường.apk", icon: "Đậu_Đậu_Đường.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/D.u_D.u_D.ng.apk" },
-        { filename: "Tăng_tốc_game_Trung.apk", icon: "Tăng_tốc_game_Trung.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/Tang_t.c_game_Trung.apk" },
-        { filename: "VPN_Speedcn_Crack_Vip_Vĩnh_Viễn.apk", icon: "VPN_Speedcn_Crack.png", locked: true },
-        { filename: "VPN_SpeedCN_Trung_Xem_Video-Buff_Vip.apk", icon: "VPN_SpeedCN_Trung.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/VPN_SpeedCN_Trung.apk" },
-        { filename: "VPN_SpeedCN_Viethoa_Xem_Video-Buff_Vip.apk.apk", icon: "VPN_SpeedCN_Viethoa.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/VPN_SpeedCN_Viethoa.apk" },
-        { filename: "X7Game_Trung.apk", icon: "X7Game_Trung.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/X7Game_Trung.apk" },
-        { filename: "X7Game_Viet.apk", icon: "X7Game_Viet.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/X7Game_Viet.apk" }
+        { name: "Đậu Đậu Đường", note: "Mỗi ngày free 648 tệ nạp", icon: "Đậu_Đậu_Đường.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/D.u_D.u_D.ng.apk" },
+        { name: "Go Duck_Mobile", note: "Tăng tốc game China", icon: "goduck.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/Go.Duck.apk" },
+        { name: "Go Duck_Giả lập", note: "Tăng tốc game China", icon: "Tăng_tốc_game_Trung.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/Tang_t.c_game_Trung.apk" },
+        { name: "VPN Speedcn Crack", note: "Mở khóa tính năng VIP", icon: "VPN_Speedcn_Crack.png", locked: true },
+        { name: "VPN SpeedCN Trung", note: "Xem video buff VIP", icon: "VPN_SpeedCN_Trung.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/VPN_SpeedCN_Trung.apk" },
+        { name: "VPN SpeedCN Viethoa", note: "Xem video buff VIP", icon: "VPN_SpeedCN_Viethoa.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/VPN_SpeedCN_Viethoa.apk" },
+        { name: "X7Game Trung", note: "Cổng game mod Trung Quốc", icon: "X7Game_Trung.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/X7Game_Trung.apk" },
+        { name: "X7Game Việt", note: "Cổng game X7 bản Việt hóa", icon: "X7Game_Viet.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/X7Game_Viet.apk" }
     ];
 
     const entContainer = document.getElementById('entertainment-apk-container');
     entContainer.innerHTML = '';
     entertainmentAppList.forEach(app => {
-        let appName = app.filename.replace(/\.apk$/i, '');
         let iconHTML = `<img src="${app.icon}" class="app-icon-img" onerror="this.onerror=null; this.outerHTML='<div class=\\'item-icon\\'>🎮</div>';">`;
         let item;
 
@@ -421,8 +421,8 @@
                 <div class="item-info">
                     ${iconHTML}
                     <div class="item-details">
-                        <h4 style="color: #6c757d;">${appName} <span class="badge-locked">Bị khóa</span></h4>
-                        <p>File: ${app.filename}</p>
+                        <h4 style="color: #6c757d;">${app.name} <span class="badge-locked">Bị khóa</span></h4>
+                        <p>${app.note}</p>
                     </div>
                 </div>
                 <button class="btn-action locked-btn">🔒 Khóa</button>
@@ -436,8 +436,8 @@
                 <div class="item-info">
                     ${iconHTML}
                     <div class="item-details">
-                        <h4>${appName}</h4>
-                        <p>File: ${app.filename}</p>
+                        <h4>${app.name}</h4>
+                        <p>${app.note}</p>
                     </div>
                 </div>
                 <div class="btn-action">⬇ Tải</div>
@@ -447,18 +447,18 @@
     });
 
     // ==========================================
-    // KHO 2: KHO ỨNG DỤNG HAY
+    // KHO 2: KHO ỨNG DỤNG HAY (Đã đổi sang trường note)
     // ==========================================
     const usefulAppList = [
-        { filename: "MicroG_YTB.apk", icon: "MicroG_YTB.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/MicroG_YTB.apk" },
-        { filename: "TikTok_Mod.apk", icon: "tiktok_mod.png", locked: true },
-        { filename: "YouTube_Crack_Prenium.apk", icon: "YouTube_Crack_Prenium.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/YouTube_Crack_Prenium.apk" }
+        { name: "ReVanced Manager Plus", note: "Hỗ trợ cập nhật cho YouTube Crack", icon: "ReVanced.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/ReVanced.Manager.Plus.apk" },
+        { name: "MicroG YTB", note: "Hỗ trợ đăng nhập cho YouTube Crack", icon: "MicroG_YTB.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/MicroG_YTB.apk" },
+        { name: "YouTube Crack Premium", note: "Chạy nền, không quảng cáo", icon: "YouTube_Crack_Prenium.png", locked: false, url: "https://github.com/datvt655/Kho-tien-ich/releases/download/v1.0/YouTube_Prenium.apk" },
+        { name: "TikTok Mod", note: "Mở khoá Set ảnh bìa", icon: "tiktok_mod.png", locked: true }
     ];
 
     const apkContainer = document.getElementById('apk-container');
     apkContainer.innerHTML = '';
     usefulAppList.forEach(app => {
-        let appName = app.filename.replace(/\.apk$/i, '');
         let iconHTML = `<img src="${app.icon}" class="app-icon-img" onerror="this.onerror=null; this.outerHTML='<div class=\\'item-icon\\'>📱</div>';">`;
         let item;
 
@@ -471,8 +471,8 @@
                 <div class="item-info">
                     ${iconHTML}
                     <div class="item-details">
-                        <h4 style="color: #6c757d;">${appName} <span class="badge-locked">Bị khóa</span></h4>
-                        <p>File: ${app.filename}</p>
+                        <h4 style="color: #6c757d;">${app.name} <span class="badge-locked">Bị khóa</span></h4>
+                        <p>${app.note}</p>
                     </div>
                 </div>
                 <button class="btn-action locked-btn">🔒 Khóa</button>
@@ -482,13 +482,12 @@
             item.className = 'item-row';
             item.href = app.url;
             item.setAttribute('download', '');
-
             item.innerHTML = `
                 <div class="item-info">
                     ${iconHTML}
                     <div class="item-details">
-                        <h4>${appName}</h4>
-                        <p>File: ${app.filename}</p>
+                        <h4>${app.name}</h4>
+                        <p>${app.note}</p>
                     </div>
                 </div>
                 <div class="btn-action">⬇ Tải</div>
